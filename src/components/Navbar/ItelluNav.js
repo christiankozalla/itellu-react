@@ -1,0 +1,107 @@
+import React, { useState } from 'react';
+
+import {
+  Media,
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap';
+
+const ItelluNav = (props) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => setIsOpen(!isOpen);
+
+  const image = {
+    path: './favicon.ico',
+    style: {
+      maxWidth: 64,
+      maxHeight: 64
+    }
+  };
+
+  return (
+    <div className="col px-0">
+      <Navbar color="light" light expand="md">
+        <NavbarBrand href="/">
+         <Media object src={image.path} alt="itellu" style={image.style} />
+        </NavbarBrand>
+
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto mx-auto" navbar>
+
+          <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                Themen
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem>
+                  Thema 1
+                </DropdownItem>
+                <DropdownItem>
+                  Thema 2
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem>
+                  Thema 3
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                Über Uns
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem>
+                  Vision
+                </DropdownItem>
+                <DropdownItem>
+                  Unsere Arbeit
+                </DropdownItem>
+                <DropdownItem>
+                  Geschichte
+                </DropdownItem>
+                <DropdownItem>
+                  Kollaboration
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+
+            <NavItem>
+              <NavLink href="/">Service</NavLink>
+          </NavItem>
+
+          <NavItem>
+            <NavLink href="/">Kontakt</NavLink>
+          </NavItem>
+
+        </Nav>
+
+        <Nav className="ml-auto" navbar>
+
+          <NavItem>
+            <NavLink href="/">Abo</NavLink>
+          </NavItem>
+
+          <NavItem>
+            <NavLink href="/">Login</NavLink>
+          </NavItem>
+        </Nav>
+
+        </Collapse>
+      </Navbar>
+    </div>
+  );
+}
+
+export default ItelluNav;
