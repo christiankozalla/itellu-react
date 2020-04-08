@@ -6,3 +6,24 @@
 
   border-top: 50px solid #224e8b;
 }
+
+.arrow-down-empty {
+  width: 50px;
+  height: 50px;
+  border: solid #224e8b;
+  border-width: 0 3px 3px 0;
+  padding: 3px;
+
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+#signUp {
+  width: 150px;
+  height: 46px;
+  color: white;
+  font-size: 1.1rem;
+  background-color: #f36954;
+  text-transform: uppercase;
+  margin-top: 1.5rem;
+}
