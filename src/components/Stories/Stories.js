@@ -4,33 +4,49 @@ import Story from "./Story.js";
 
 class Stories extends React.Component {
   state = {
-    stories: [
-      {
-        id: 1,
-        header: "This is the Header",
-        subHeader: "Subheader here",
-        imagePath: "/public/originals/picture.jpg",
-        imageAlt: "image description",
-        content:
-          "This is the content of the Story. It will be only displayed, when the user clicks on the story. Maybe a div can pop down and show the story content.",
-      },
-    ],
+    isLoaded: false,
+    stories: [],
   };
 
   componentDidMount() {
     this.getStories();
   }
 
-  getStories = () => {};
+  getStories = () => {
+    return fetch("http://localhost:4001/stories")
+      .then((res) => {
+        return res.json();
+      })
+      .then(
+        (jsonResponse) => {
+          console.log(jsonResponse);
+          this.setState({
+            stories: jsonResponse,
+            isLoaded: true,
+          });
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error,
+          });
+        }
+      )
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   render() {
+    const { stories } = this.state;
     return (
       <div className="row mx-auto">
-        {this.state.stories.map((story) => (
+        {stories.map((story) => (
           <Story
-            header={story.header}
-            subheader={story.subHeader}
-            imageUrl={story.imagePath}
+            key={story.timestamp}
+            header={story.content.header}
+            subheader={story.content.subheader}
+            imagePath={story.imagePath}
             alt={story.imageAlt}
           />
         ))}
@@ -40,3 +56,11 @@ class Stories extends React.Component {
 }
 
 export default Stories;
+
+/* 
+
+
+
+
+
+*/

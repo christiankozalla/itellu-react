@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import "./ItelluNav.css";
+
+import logo from "../../files/logo.bmp";
 
 import {
   Media,
@@ -22,7 +25,8 @@ const styles = {
   toggler: {
     color: "#224e8b",
     backgroundColor: "#5889a9",
-    backgroundImage: "url(./favicon.ico)",
+    width: 44,
+    height: 44,
   },
 };
 
@@ -43,10 +47,18 @@ const ItelluNav = (props) => {
     <div className="col px-0">
       <Navbar expand="md" style={styles.itelluNav}>
         <NavbarBrand href="/">
-          <Media object src={image.path} alt="itellu" style={image.style} />
+          <Media object src={logo} alt="itellu" style={image.style} />
         </NavbarBrand>
 
-        <NavbarToggler onClick={toggle} style={styles.toggler} />
+        <NavbarToggler onClick={toggle} style={styles.toggler}>
+          <div id="menuToggle">
+            <input type="checkbox" />
+
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </NavbarToggler>
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto mx-auto" navbar>
             <UncontrolledDropdown nav inNavbar>

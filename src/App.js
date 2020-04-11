@@ -36,7 +36,7 @@ function App() {
         </h2>
       </div>
 
-      <div class="arrow-down mx-auto"></div>
+      <div className="arrow-down mx-auto"></div>
 
       <div className="row">
         <div className="col-2 col-md-3 col-sm-6 my-auto mx-auto">
