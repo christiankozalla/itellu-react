@@ -32,7 +32,7 @@ function App() {
           Wir glauben an <br />
           Geschichten und <br />
           Wissenschaft. <br />
-          sowie an Wandel.
+          Sowie an Wandel.
         </h2>
       </div>
 

@@ -1,6 +1,5 @@
 import React from "react";
-
-import Story from "./Story.js";
+import StorySlides from "./StorySlides";
 
 class Stories extends React.Component {
   state = {
@@ -41,26 +40,10 @@ class Stories extends React.Component {
     const { stories } = this.state;
     return (
       <div className="row mx-auto">
-        {stories.map((story) => (
-          <Story
-            key={story.timestamp}
-            header={story.content.header}
-            subheader={story.content.subheader}
-            imagePath={story.imagePath}
-            alt={story.imageAlt}
-          />
-        ))}
+        <StorySlides stories={stories} />
       </div>
     );
   }
 }
 
 export default Stories;
-
-/* 
-
-
-
-
-
-*/
