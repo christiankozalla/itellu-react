@@ -1,77 +1,35 @@
 import React, { useState } from "react";
-import {
-  Carousel,
-  CarouselItem,
-  CarouselControl,
-  CarouselIndicators,
-  CarouselCaption,
-} from "reactstrap";
+
+// react-bootstrap imports
+import Carousel from "react-bootstrap/Carousel";
 
 import "./StorySlides.css";
 
-const styles = {
-  image: {
-    maxWidth: "100%",
-  },
-};
-
 const StorySlides = (props) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [animating, setAnimating] = useState(false);
+  const [index, setIndex] = useState(0);
 
-  const next = () => {
-    if (animating) return;
-    const nextIndex =
-      activeIndex === props.stories.length - 1 ? 0 : activeIndex + 1;
-    setActiveIndex(nextIndex);
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
   };
 
-  const previous = () => {
-    if (animating) return;
-    const nextIndex =
-      activeIndex === 0 ? props.stories.length - 1 : activeIndex - 1;
-    setActiveIndex(nextIndex);
-  };
-
-  const goToIndex = (newIndex) => {
-    if (animating) return;
-    setActiveIndex(newIndex);
-  };
-
-  const slides = props.stories.map((item) => {
-    return (
-      <CarouselItem
-        onExiting={() => setAnimating(true)}
-        onExited={() => setAnimating(false)}
-        key={item.timestamp}
-      >
-        <img src={item.imagePath} alt={item.imageAlt} style={styles.image} />
-        <CarouselCaption
-          captionText={item.content.subheader}
-          captionHeader={item.content.header}
-        />
-      </CarouselItem>
-    );
-  });
-
+  // remove "slide" prop from <Carousel> to make Stories slide in and out again
   return (
-    <Carousel activeIndex={activeIndex} next={next} previous={previous}>
-      <CarouselIndicators
-        items={props.stories}
-        activeIndex={activeIndex}
-        onClickHandler={goToIndex}
-      />
-      {slides}
-      <CarouselControl
-        direction="prev"
-        directionText="Previous"
-        onClickHandler={previous}
-      />
-      <CarouselControl
-        direction="next"
-        directionText="Next"
-        onClickHandler={next}
-      />
+    <Carousel activeIndex={index} onSelect={handleSelect} slide={false}>
+      {props.stories.map((story) => {
+        return (
+          <Carousel.Item key={story.timestamp}>
+            <img
+              className="d-block w-100"
+              src={story.imagePath}
+              alt={story.imageAlt}
+            />
+            <Carousel.Caption>
+              <p>{story.content.subheader}</p>
+              <h3>{story.content.header}</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
+        );
+      })}
     </Carousel>
   );
 };

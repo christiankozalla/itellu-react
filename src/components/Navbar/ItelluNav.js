@@ -3,20 +3,9 @@ import "./ItelluNav.css";
 
 import logo from "../../files/logo.bmp";
 
-import {
-  Media,
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "reactstrap";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 const styles = {
   itelluNav: {
@@ -31,7 +20,6 @@ const styles = {
 };
 
 const image = {
-  path: "./favicon.ico",
   style: {
     maxWidth: 64,
     maxHeight: 64,
@@ -46,11 +34,11 @@ const ItelluNav = (props) => {
   return (
     <div className="col px-0">
       <Navbar expand="md" style={styles.itelluNav}>
-        <NavbarBrand href="/">
-          <Media object src={logo} alt="itellu" style={image.style} />
-        </NavbarBrand>
+        <Navbar.Brand href="/">
+          <img src={logo} alt="itellu" style={image.style} />
+        </Navbar.Brand>
 
-        <NavbarToggler onClick={toggle} style={styles.toggler}>
+        <Navbar.Toggle onClick={toggle} style={styles.toggler}>
           <div id="menuToggle">
             <input type="checkbox" />
 
@@ -58,52 +46,33 @@ const ItelluNav = (props) => {
             <span></span>
             <span></span>
           </div>
-        </NavbarToggler>
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto mx-auto" navbar>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Themen
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>Thema 1</DropdownItem>
-                <DropdownItem>Thema 2</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Thema 3</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+        </Navbar.Toggle>
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto mx-auto">
+            <NavDropdown title="Themen" id="basic-nav-dropdown">
+              <NavDropdown.Item>Thema 1</NavDropdown.Item>
+              <NavDropdown.Item>Thema 2</NavDropdown.Item>
+              <NavDropdown.Item>Thema 3</NavDropdown.Item>
+            </NavDropdown>
 
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Über Uns
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>Vision</DropdownItem>
-                <DropdownItem>Unsere Arbeit</DropdownItem>
-                <DropdownItem>Geschichte</DropdownItem>
-                <DropdownItem>Kollaboration</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+            <NavDropdown title="Über Uns" id="basic-nav-dropdown">
+              <NavDropdown.Item>Vision</NavDropdown.Item>
+              <NavDropdown.Item>Unsere Arbeit</NavDropdown.Item>
+              <NavDropdown.Item>Geschichte</NavDropdown.Item>
+              <NavDropdown.Item>Kollaboration</NavDropdown.Item>
+            </NavDropdown>
 
-            <NavItem>
-              <NavLink href="/">Service</NavLink>
-            </NavItem>
+            <Nav.Link href="/">Service</Nav.Link>
 
-            <NavItem>
-              <NavLink href="/">Kontakt</NavLink>
-            </NavItem>
+            <Nav.Link href="/">Kontakt</Nav.Link>
           </Nav>
 
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink href="/">Abo</NavLink>
-            </NavItem>
+          <Nav className="aboLogin ml-auto" navbar>
+            <Nav.Link href="/">Abo</Nav.Link>
 
-            <NavItem>
-              <NavLink href="/">Login</NavLink>
-            </NavItem>
+            <Nav.Link href="/">Login</Nav.Link>
           </Nav>
-        </Collapse>
+        </Navbar.Collapse>
       </Navbar>
     </div>
   );
