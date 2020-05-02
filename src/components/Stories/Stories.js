@@ -4,7 +4,9 @@ import StorySlides from "./StorySlides";
 class Stories extends React.Component {
   state = {
     isLoaded: false,
-    stories: [],
+    latestStories: [],
+    recomStories: [],
+    cardStories: [],
   };
 
   componentDidMount() {
@@ -19,15 +21,39 @@ class Stories extends React.Component {
       .then(
         (jsonResponse) => {
           console.log(jsonResponse);
+
+          // Verteile jsonResponse auf latestStories, recomStories, cardStories
+          const latest = [];
+          const recommended = [];
+          const cards = [];
+
+          jsonResponse.forEach((story) => {
+            switch (story.type) {
+              case "latest":
+                latest.push(story);
+                break;
+              case "recom":
+                recommended.push(story);
+                break;
+              case "card":
+                cards.push(story);
+                break;
+              default:
+                console.log("Could not allocate Story");
+            }
+          });
+
           this.setState({
-            stories: jsonResponse,
+            latestStories: latest,
+            recomStories: recommended,
+            cardStories: cards,
             isLoaded: true,
           });
         },
         (error) => {
           this.setState({
             isLoaded: true,
-            error,
+            error: error,
           });
         }
       )
@@ -37,11 +63,26 @@ class Stories extends React.Component {
   };
 
   render() {
-    const { stories } = this.state;
+    const { latestStories, recomStories, cardStories } = this.state;
     return (
-      <div className="row mx-auto">
-        <StorySlides stories={stories} />
-      </div>
+      <React.Fragment>
+        <div className="row mx-auto">
+          <div className="mx-auto text-center">
+            <h2 style={{ padding: "0.9rem" }}>
+              <strong>Latest Stories</strong>
+            </h2>
+            <StorySlides stories={latestStories} />
+          </div>
+        </div>
+        <div className="row mx-auto">
+          <div className="mx-auto text-center">
+            <h2 style={{ padding: "0.9rem" }}>
+              <strong>Recommended Stories</strong>
+            </h2>
+            <StorySlides stories={recomStories} />
+          </div>
+        </div>
+      </React.Fragment>
     );
   }
 }

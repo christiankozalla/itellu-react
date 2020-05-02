@@ -24,8 +24,8 @@ const StorySlides = (props) => {
               alt={story.imageAlt}
             />
             <Carousel.Caption>
-              <p>{story.content.subheader}</p>
-              <h3>{story.content.header}</h3>
+              <p>{story.subheader}</p>
+              <h3>{story.header}</h3>
             </Carousel.Caption>
           </Carousel.Item>
         );

@@ -53,9 +53,6 @@ function App() {
 
       <SimpleArrow />
 
-      <div className="text-center" style={styles.headline}>
-        Latest Stories
-      </div>
       <Stories />
 
       <SimpleArrow />
